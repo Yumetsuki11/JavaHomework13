@@ -31,26 +31,11 @@ public class ProductManagerTest {
         Assertions.assertArrayEquals(expected, repo.findAll());
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "0, {}",
-            "8, ''",
-            "8, ' '",
-            "0, '  '",
-            "6, 'е'", //русская
-            "1, 'Е'", //русская
-            "2, 'e'", //английская
-            "2, 'i 9'",
-            "2, '9'",
-            "5, 'хлеб чёрный'",
-            "0, 'унитаз'"
-    })
-    public void shouldFindByName(int expectedSum, String text) {
-        Product[] actual = manager.searchBy(text);
-        int actualSum = 0;
-        for (int i = 0; i < actual.length; i++) {
-            actualSum += actual[i].getId();
-        }
-        Assertions.assertEquals(expectedSum, actualSum);
+    @Test
+    public void shouldFindByName() {
+        Product[] actual = manager.searchBy("н");
+        Product[] expected = {book, unspecified};
+
+        Assertions.assertArrayEquals(expected, actual);
     }
 }
