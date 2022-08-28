@@ -32,7 +32,23 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldFindByName() {
+    public void shouldFindByNameWhenNoMatches() {
+        Product[] actual = manager.searchBy("Кирпич");
+        Product[] expected = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindByNameWhenOneMatches() {
+        Product[] actual = manager.searchBy("dm");
+        Product[] expected = {phone};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindByNameWhenSeveralMatch() {
         Product[] actual = manager.searchBy("н");
         Product[] expected = {book, unspecified};
 
